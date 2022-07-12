@@ -95,7 +95,6 @@ sleep 3
 cd /var/www/html/
 wget $repository/ministra-$VERSION.zip
 unzip ministra-$VERSION.zip
-mv ministra-$VERSION stalker_portal
 rm -rf *.zip
 
 #Patch Support MAG420/MAG322/MAG324 ON THE PORTAL VERSION 4.9.X
