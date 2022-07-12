@@ -53,8 +53,8 @@ apt-get install apache2 -y
 /etc/init.d/apache2 stop
 sleep 1
 
-apt install php7.4 php7.4-geoip php7.4-intl php7.4-tidy php7.4-igbinary php7.4-msgpack php7.4-mcrypt php7.4-mbstring php7.4-zip memcached php7.4 php7.4-xml php7.4-gettext php7.4-soap php7.4-mysql php-pear nodejs libapache2-mod-php7.4 php7.4-curl php7.4-imagick php7.4-sqlite3 unzip -y
-update-alternatives --set php /usr/bin/php7.4
+apt install php7.4.4 php7.4.4-geoip php7.4.4-intl php7.4.4-tidy php7.4.4-igbinary php7.4.4-msgpack php7.4.4-mcrypt php7.4.4-mbstring php7.4.4-zip memcached php7.4.4 php7.4.4-xml php7.4.4-gettext php7.4.4-soap php7.4.4-mysql php-pear nodejs libapache2-mod-php7.4.4 php7.4.4-curl php7.4.4-imagick php7.4.4-sqlite3 unzip -y
+update-alternatives --set php /usr/bin/php7.4.4
 
 sleep 2
 
@@ -62,7 +62,7 @@ echo -e " \e[32mInstalling phing\e[0m"
 sleep 3
 pear channel-discover pear.phing.info
 #pear install -Z phing/phing-2.15.2
-pear install --alldeps phing/phing-2.17.4
+pear install --alldeps phing/phing-2.15.2
 
 echo -e " \e[32mSet the Server Timezone to EDT\e[0m"
 sleep 3
@@ -134,7 +134,7 @@ sed -i -r 's/^(default_locale =).*/\1 en_US.utf8/' config.ini
 
 cd /var/www/html/stalker_portal/deploy
 sed -i 's/composer.phar install/composer.phar install --version=1.9.1/g' build.xml
-sed -i 's/apt-get -y install php-soap php7-intl php-gettext php7-memcache php7-curl php7-mysql php7-tidy php7-imagick php7-geoip curl/apt-get -y install php7.4-soap php7.4-intl php7.4-gettext php7.4-memcache php7.4-curl php7.4-mysql php7.4-tidy php7.4-imagick php7.4-geoip curl/g' build.xml
+sed -i 's/apt-get -y install php7.4-soap php7.4-intl php7.4-gettext php7.4-memcache php7.4-curl php7.4-mysql php7.4-tidy php7.4-imagick php7.4-geoip curl/apt-get -y install php7.4.4-soap php7.4.4-intl php7.4.4-gettext php7.4.4-memcache php7.4.4-curl php7.4.4-mysql php7.4.4-tidy php7.4.4-imagick php7.4.4-geoip curl/g' build.xml
 sudo phing
 sleep 1
 
