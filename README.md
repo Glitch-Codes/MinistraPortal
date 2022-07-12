@@ -1,4 +1,4 @@
-# (Unfinished) Ministra Portal 5.6.8 install on Ubuntu 22.04 LTS
+# Ministra Portal 5.6.8 install on Ubuntu 22.04 LTS
 
 Ministra Portal auto install script on Ubuntu 22.04 LTS
 
