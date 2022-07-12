@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo -e " \e[32mUpdateing system\e[0m"
+echo -e " \e[32mUpdating system\e[0m"
 sleep 2
 apt-get update -y
 apt-get upgrade -y
