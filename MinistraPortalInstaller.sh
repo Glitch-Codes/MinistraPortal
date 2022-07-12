@@ -53,16 +53,23 @@ apt-get install apache2 -y
 /etc/init.d/apache2 stop
 sleep 1
 
-apt install php7.4 php7.4-geoip php7.4-intl php7.4-tidy php7.4-igbinary php7.4-msgpack php7.4-mcrypt php7.4-mbstring php7.4-zip memcached php7.4 php7.4-xml php7.4-gettext php7.4-soap php7.4-mysql php-pear nodejs libapache2-mod-php7.4 php7.4-curl php7.4-imagick php7.4-sqlite3 unzip -y
-update-alternatives --set php /usr/bin/php7.4
+apt-get -y install php5.6-geoip php5.6-intl php5.6-tidy php5.6-igbinary php5.6-msgpack php5.6-mcrypt php5.6-mbstring php5.6-zip memcached php5.6 php5.6-xml php5.6-gettext php5.6-soap php5.6-mysql php-pear nodejs libapache2-mod-php5.6 php5.6-curl php5.6-imagick php5.6-sqlite3 unzip
+update-alternatives --set php /usr/bin/php5.6
 
 sleep 2
+
+echo -e " \e[32mInstalling composer\e[0m"
+sleep 3
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php -r "if (hash_file('sha384', 'composer-setup.php') === '55ce33d7678c5a611085589f1f3ddf8b3c52d662cd01d4ba75c0ee0459970c2200a51f492d557530c71c15d8dba01eae') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+php composer-setup.php
+php -r "unlink('composer-setup.php');"
 
 echo -e " \e[32mInstalling phing\e[0m"
 sleep 3
 pear channel-discover pear.phing.info
 #pear install -Z phing/phing-2.15.2
-pear install --alldeps phing/phing-2.15.2
+pear install --alldeps phing/phing-2.17.4
 
 echo -e " \e[32mSet the Server Timezone to EDT\e[0m"
 sleep 3
@@ -90,7 +97,7 @@ echo 'default_authentication_plugin=mysql_native_password' >> /etc/mysql/mysql.c
 sed -i 's/max_allowed_packet[[:space:]]= 16/max_allowed_packet      = 32/' /etc/mysql/mysql.conf.d/mysqld.cnf
 service mysql restart
 
-echo -e " \e[32mInstalling Stalker Portal $VERSION \e[0m"
+echo -e " \e[32mInstalling Ministra $VERSION \e[0m"
 sleep 3
 cd /var/www/html/
 wget $repository/ministra-$VERSION.zip
@@ -108,8 +115,8 @@ sed -i "685i\                if (\!this.profile.clock_format) {" /var/www/html/s
 sed -i "686i\                    this.profile.clock_format = (get_word('time_format') && this.clock_formats[get_word('time_format')]) ? this.clock_formats[get_word('time_format')]: '24h';" /var/www/html/stalker_portal/c/xpcom.common.js
 sed -i "687i\                }\n" /var/www/html/stalker_portal/c/xpcom.common.js
 
-sed -i 's/short_open_tag = Off/short_open_tag = On/g' /etc/php/7.4/apache2/php.ini
-ln -s /etc/php/7.4/mods-available/mcrypt.ini /etc/php/8.0/mods-available/
+sed -i 's/short_open_tag = Off/short_open_tag = On/g' /etc/php/5.6/apache2/php.ini
+ln -s /etc/php/5.6/mods-available/mcrypt.ini /etc/php/8.0/mods-available/
 phpenmod mcrypt
 a2enmod rewrite
 
@@ -133,8 +140,8 @@ sed -i -r 's|^(default_timezone =).*|\1'" $TIME_ZONE"'|' config.ini
 sed -i -r 's/^(default_locale =).*/\1 en_US.utf8/' config.ini
 
 cd /var/www/html/stalker_portal/deploy
-sed -i 's/composer.phar install/composer.phar install --version=1.9.1/g' build.xml
-sed -i 's/apt-get -y install php7.4-soap php7.4-intl php7.4-gettext php7.4-memcache php7.4-curl php7.4-mysql php7.4-tidy php7.4-imagick php7.4-geoip curl/apt-get -y install php7.4-soap php7.4-intl php7.4-gettext php7.4-memcache php7.4-curl php7.4-mysql php7.4-tidy php7.4-imagick php7.4-geoip curl/g' build.xml
+sed -i 's/composer.phar install' build.xml
+sed -i 's/apt-get -y install php-soap php5-intl php-gettext php5-memcache php5-curl php5-mysql php5-tidy php5-imagick php5-geoip curl/apt-get -y install php5.6-soap php5.6-intl php5.6-gettext php5.6-memcache php5.6-curl php5.6-mysql php5.6-tidy php5.6-imagick php5.6-geoip curl/g' build.xml
 sudo phing
 sleep 1
 
