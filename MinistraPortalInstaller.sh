@@ -97,12 +97,6 @@ wget $repository/ministra-$VERSION.zip
 unzip ministra-$VERSION.zip
 rm -rf *.zip
 
-#Patch Support MAG420/MAG322/MAG324 ON THE PORTAL VERSION 4.9.X
-cd /var/www/html/stalker_portal
-wget $repository/support.patch
-patch -p1 < support.patch
-sleep 1
-
 sed -i "s/'modified!=' => ''/'modified!=' => time()/" /var/www/html/stalker_portal/server/administrator/add_itv.php
 sed -i "44i\    this.ntp_wait_time = 0;\n" /var/www/html/stalker_portal/c/xpcom.common.js
 sed -i "46i\    this.clock_formats = {'12h': '{2}:{1} {3}', '24h': '{0}:{1}'};\n" /var/www/html/stalker_portal/c/xpcom.common.js
