@@ -53,8 +53,8 @@ apt-get install apache2 -y
 /etc/init.d/apache2 stop
 sleep 1
 
-apt-get -y install php5.6-geoip php5.6-intl php5.6-tidy php5.6-igbinary php5.6-msgpack php5.6-mcrypt php5.6-mbstring php5.6-zip memcached php5.6 php5.6-xml php5.6-gettext php5.6-soap php5.6-mysql php-pear nodejs libapache2-mod-php5.6 php5.6-curl php5.6-imagick php5.6-sqlite3 unzip curl
-update-alternatives --set php /usr/bin/php5.6
+apt-get -y install php7.4-geoip php7.4-intl php7.4-tidy php7.4-igbinary php7.4-msgpack php7.4-mcrypt php7.4-mbstring php7.4-zip memcached php7.4 php7.4-xml php7.4-gettext php7.4-soap php7.4-mysql php-pear nodejs libapache2-mod-php7.4 php7.4-curl php7.4-imagick php7.4-sqlite3 unzip curl
+update-alternatives --set php /usr/bin/php7.4
 
 sleep 2
 
@@ -141,7 +141,7 @@ sed -i -r 's/^(default_locale =).*/\1 en_US.utf8/' config.ini
 
 cd /var/www/html/stalker_portal/deploy
 sed -i 's/composer.phar install' build.xml
-sed -i 's/apt-get -y install php-soap php5-intl php-gettext php5-memcache php5-curl php5-mysql php5-tidy php5-imagick php5-geoip curl/apt-get -y install php5.6-soap php5.6-intl php5.6-gettext php5.6-memcache php5.6-curl php5.6-mysql php5.6-tidy php5.6-imagick php5.6-geoip curl/g' build.xml
+sed -i 's/apt-get -y install php-soap php5-intl php-gettext php5-memcache php5-curl php5-mysql php5-tidy php5-imagick php5-geoip curl/apt-get -y install php7.4-soap php7.4-intl php7.4-gettext php7.4-memcache php7.4-curl php7.4-mysql php7.4-tidy php7.4-imagick php7.4-geoip curl/g' build.xml
 sudo phing
 sleep 1
 
