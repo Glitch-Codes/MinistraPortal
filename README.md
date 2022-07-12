@@ -7,19 +7,19 @@ Ministra Portal auto install script on Ubuntu 22.04 LTS
 ##### Runs on
 [![Ubuntu](https://user-images.githubusercontent.com/12951085/139538206-833d8d33-0d1b-4d51-8ec8-86e5cf14f82e.png)](https://www.ubuntu.com)
 
-This script work only on Clean Ubuntu 20.04 LTS / 18.04 LTS
+This script work only on Clean Ubuntu 22.04 LTS
 
 Stalker auto install script
-  * Version of Stalker 4.9.35
+  * Version of MinistraTV 5.6.8
 
 ## Installation
 ```bash
 apt-get install git
-git clone https://github.com/madzharov/stalker-portal-4.9.git
-cd stalker-portal-4.9/
+git clone https://github.com/Glitch-Codes/MinistraPortal.git
+cd MinistraPortal/
 ```
 
-Open stalker_portal_4.9.sh with your favorite text editor and change on line 11
+Open MinistraPortalInstaller.sh with your favorite text editor and change on line 11
 ```bash
 mysql_root_password="test123456"
 ```
@@ -34,8 +34,8 @@ This is the time zone that will be set during the installation, you can change i
 
 The installation itself is as follows:
 ```bash
-chmod +x stalker_portal_4.9.sh
-./stalker_portal_4.9.sh
+chmod +x MinistraPortalInstaller.sh
+./MinistraPortalInstaller.sh
 ```
 Accordingly, during the installation, when executing the last command, phing will ask you for the root password for MySQL, enter the password you set on line 11
 
