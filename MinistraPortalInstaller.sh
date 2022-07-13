@@ -6,7 +6,7 @@ apt-get update -y
 apt-get upgrade -y
 apt-get install net-tools -y 
 
-VERSION="5.6.8"
+VERSION="5.6.5"
 TIME_ZONE="America/Toronto" #
 mysql_root_password="test123456"
 repository="http://vancho.xyz/stalker"
@@ -64,7 +64,10 @@ php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 php -r "if (hash_file('sha384', 'composer-setup.php') === '55ce33d7678c5a611085589f1f3ddf8b3c52d662cd01d4ba75c0ee0459970c2200a51f492d557530c71c15d8dba01eae') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
 php composer-setup.php
 php -r "unlink('composer-setup.php');"
+
+echo -e " \e[32mConfigering composer\e[0m"
 mv composer.phar /usr/local/bin/composer
+composer global config --no-plugins allow-plugins.hirak/prestissimo true
 
 echo -e " \e[32mInstalling phing\e[0m"
 sleep 3
@@ -141,8 +144,8 @@ sed -i -r 's|^(default_timezone =).*|\1'" $TIME_ZONE"'|' config.ini
 sed -i -r 's/^(default_locale =).*/\1 en_US.utf8/' config.ini
 
 cd /var/www/html/stalker_portal/deploy
-sed -i 's/composer.phar install' build.xml
-sed -i 's/apt-get -y install php-soap php5-intl php-gettext php5-memcache php5-curl php5-mysql php5-tidy php5-imagick php5-geoip curl/apt-get -y install php7.4-soap php7.4-intl php7.4-gettext php7.4-memcache php7.4-curl php7.4-mysql php7.4-tidy php7.4-imagick php7.4-geoip curl/g' build.xml
+sed -i 's/composer.phar install/g' build.xml
+sed -i 's/apt-get -y install php-soap php7-intl php-gettext php7-memcache php7-curl php7-mysql php7-tidy php7-imagick php7-geoip curl/apt-get -y install php7.4-soap php7.4-intl php7.4-gettext php7.4-memcache php7.4-curl php7.4-mysql php7.4-tidy php7.4-imagick php7.4-geoip curl/g' build.xml
 sudo phing
 sleep 1
 
